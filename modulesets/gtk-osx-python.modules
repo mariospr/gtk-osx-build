@@ -46,7 +46,7 @@
   <autotools id="python" autogenargs="--enable-shared"
 	     autogen-sh="configure">
     <branch repo="python"
-	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
+	    module="2.7.5/Python-2.7.5.tar.xz" version="2.7.5">
     </branch>
     <dependencies>
     </dependencies>
@@ -56,7 +56,7 @@
   </autotools>
 
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch repo="python" module="3.3.0/Python-3.3.0.tar.xz" version="3.3.0"/>
+    <branch repo="python" module="3.3.2/Python-3.3.2.tar.xz" version="3.3.2"/>
     <after>
       <dep package="berkeleydb"/>
     </after>
