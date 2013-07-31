@@ -160,8 +160,8 @@
   </autotools>
 
    <autotools id="pygobject3" autogen-sh="configure" >
-    <branch version="3.4.1" module="pygobject/3.4/pygobject-3.4.1.tar.xz"
-            hash="sha256:21dbef53f5a29bcb547f36ba42e021f71981e1c50e8f89526e393d77b36a8b1f"/>
+    <branch version="3.8.3" module="pygobject/3.8/pygobject-3.8.3.tar.xz"
+            hash="sha256:384b3e1b8d1e7c8796d7eb955380d62946dd0ed9c54ecf0817af2d6b254e082c"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>
