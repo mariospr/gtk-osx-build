@@ -15,6 +15,7 @@
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="git" name="github.com" href="git://github.com/"/>
+  <repository type="git" name="git.gnome.org" href="git://git.gnome.org/"/>
   <repository type="tarball" name="dbus.freedesktop.org"
 	      href="http://dbus.freedesktop.org/releases/"/>
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
@@ -193,9 +194,11 @@ Libglade itself is deprecated. This is the last release. -->
     </after>
   </autotools>
 
-  <autotools id="ORBit2" autogen-sh="configure">
+  <!--autotools id="ORBit2" autogen-sh="configure">
     <branch module="ORBit2/2.14/ORBit2-2.14.19.tar.bz2" version="2.14.19"
-            hash="sha256:55c900a905482992730f575f3eef34d50bda717c197c97c08fa5a6eafd857550"/>
+            hash="sha256:55c900a905482992730f575f3eef34d50bda717c197c97c08fa5a6eafd857550"/-->
+  <autotools id="ORBit2">
+    <branch repo="git.gnome.org"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
