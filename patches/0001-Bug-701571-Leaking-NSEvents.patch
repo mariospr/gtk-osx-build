@@ -1,0 +1,49 @@
+diff --git a/gdk/quartz/gdkeventloop-quartz.c~ b/gdk/quartz/gdkeventloop-quartz.c
+index 224d84c..6e2a6a3 100644
+--- a/gdk/quartz/gdkeventloop-quartz.c~
++++ b/gdk/quartz/gdkeventloop-quartz.c
+@@ -617,7 +617,21 @@ gdk_event_prepare (GSource *source,
+   gboolean retval;
+ 
+   GDK_THREADS_ENTER ();
+-  
++  /* Refresh the autorelease pool if we're at the base CFRunLoop level
++   * (indicated by current_loop_level) and the base g_main_loop level
++   * (indicated by g_main_depth()). Messing with the autorelease pool at
++   * any level of nesting can cause access to deallocated memory because
++   * autorelease_pool is static and releasing a pool will cause all pools
++   * allocated inside of it to be released as well.
++   */
++  if (current_loop_level == 0 && g_main_depth() == 0)
++    {
++      if (autorelease_pool)
++        [autorelease_pool drain];
++
++      autorelease_pool = [[NSAutoreleasePool alloc] init];
++    }
++
+   *timeout = -1;
+ 
+   retval = (_gdk_event_queue_find_first (_gdk_display) != NULL ||
+@@ -652,21 +666,6 @@ gdk_event_dispatch (GSource     *source,
+ 
+   GDK_THREADS_ENTER ();
+ 
+-  /* Refresh the autorelease pool if we're at the base CFRunLoop level
+-   * (indicated by current_loop_level) and the base g_main_loop level
+-   * (indicated by g_main_depth()). Messing with the autorelease pool at
+-   * any level of nesting can cause access to deallocated memory because
+-   * autorelease_pool is static and releasing a pool will cause all pools
+-   * allocated inside of it to be released as well.
+-   */
+-  if (current_loop_level == 0 && g_main_depth() == 0)
+-    {
+-      if (autorelease_pool)
+-        [autorelease_pool drain];
+-
+-      autorelease_pool = [[NSAutoreleasePool alloc] init];
+-    }
+-
+   _gdk_events_queue (_gdk_display);
+ 
+   event = _gdk_event_unqueue (_gdk_display);
